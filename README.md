@@ -1,5 +1,7 @@
 # alura-tracker
 
+Basic Vue3 Framework learning project, following the courses https://www.alura.com.br/curso-online-vue3-comecando-framework and https://www.alura.com.br/curso-online-vue3-avancando-framework
+
 ## Project setup
 ```
 npm install
