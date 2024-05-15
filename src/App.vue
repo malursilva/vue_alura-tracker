@@ -11,7 +11,6 @@
           Você não está muito produtivo hoje :|
         </Box>
       </div>
-      
     </div>
   </main>
 </template>
