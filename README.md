@@ -1,6 +1,9 @@
 # alura-tracker
 
-Basic Vue3 Framework learning project, following the courses https://www.alura.com.br/curso-online-vue3-comecando-framework and https://www.alura.com.br/curso-online-vue3-avancando-framework
+Basic Vue3 Framework learning project, following the courses: 
+  - https://www.alura.com.br/curso-online-vue3-comecando-framework
+  - https://www.alura.com.br/curso-online-vue3-avancando-framework
+  - https://www.alura.com.br/curso-online-vue3-composition-api-vuex
 
 ## Project setup
 ```
