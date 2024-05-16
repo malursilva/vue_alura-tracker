@@ -12,7 +12,7 @@
   "tarefas": [
     {
       "id": "1",
-      "duracaoEmSegundos": 12000,
+      "duracaoEmSegundos": 1200,
       "descricao": "Implementação integração API",
       "projeto": {
         "id": "43a5",

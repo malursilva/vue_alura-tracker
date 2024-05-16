@@ -21,7 +21,7 @@ import { defineComponent } from 'vue';
 import { useStore } from '@/store';
 import { TipoNotificacao } from '@/interfaces/INotificacao';
 import useNotificador from '@/hooks/notificador'
-import { ALTERAR_PROJETO, CADASTRAR_PROJETOS } from '@/store/tipo-acoes';
+import { ALTERAR_PROJETO, CADASTRAR_PROJETO } from '@/store/tipo-acoes';
 
 export default defineComponent({
     name: 'FormularioProjetos',
@@ -49,7 +49,7 @@ export default defineComponent({
                     .then(() => this.lidarComSucesso("Seu projeto foi alterado."))
             } else {
                 this.store
-                    .dispatch(CADASTRAR_PROJETOS, this.nomeDoProjeto)
+                    .dispatch(CADASTRAR_PROJETO, this.nomeDoProjeto)
                     .then(() => this.lidarComSucesso("Seu novo projeto foi cadastrado"))
             }
         },
