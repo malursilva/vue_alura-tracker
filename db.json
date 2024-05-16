@@ -11,12 +11,12 @@
   ],
   "tarefas": [
     {
-      "id": "1",
-      "duracaoEmSegundos": 1200,
-      "descricao": "Implementação integração API",
+      "id": "982d",
+      "duracaoEmSegundos": 3,
+      "descricao": "Aula alura",
       "projeto": {
-        "id": "43a5",
-        "nome": "Plano de Estudos"
+        "id": "664b",
+        "nome": "Estudo Typescript"
       }
     }
   ]

@@ -1,7 +1,7 @@
 <template>
     <Box>
-        <div class="columns">
-            <div class="column is-4">{{tarefa.descricao || 'Tarefa sem descrição' }}</div>
+        <div class="columns selecionavel" @click="tarefaSelecionada">
+            <div class="column is-4">{{ tarefa.descricao || 'Tarefa sem descrição' }}</div>
             <div class="column is-3">
                 {{ tarefa.projeto?.nome || 'N/D' }}
             </div>
@@ -20,6 +20,7 @@ import Box from './Box.vue'
 
 export default defineComponent({
     name: 'TarefaLista',
+    emits: ['aoSelecionarTarefa'],
     components: {
         Cronometro,
         Box
@@ -29,10 +30,17 @@ export default defineComponent({
             type: Object as PropType<ITarefa>,
             required: true
         }
+    },
+    methods: {
+        tarefaSelecionada(): void {
+            this.$emit('aoSelecionarTarefa', this.tarefa)
+        }
     }
 })
 </script>
 
 <style scoped>
-
+.selecionavel {
+    cursor: pointer;
+}
 </style>

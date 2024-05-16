@@ -43,6 +43,7 @@ export default defineComponent({
     methods: {
         finalizarTarefa(tempoDecorrido: number): void {
             this.$emit('aoSalvarTarefa', {
+                id: new Date().toISOString,
                 duracaoEmSegundos: tempoDecorrido,
                 descricao: this.descricao,
                 projeto: this.projetos.find(proj => proj.id == this.idProjeto)
