@@ -8,5 +8,16 @@
       "id": "43a5",
       "nome": "Plano de Estudos"
     }
+  ],
+  "tarefas": [
+    {
+      "id": "1",
+      "duracaoEmSegundos": 12000,
+      "descricao": "Implementação integração API",
+      "projeto": {
+        "id": "43a5",
+        "nome": "Plano de Estudos"
+      }
+    }
   ]
 }
