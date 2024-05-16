@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import Formulario from '../components/Formulario.vue'
 import Tarefa from '../components/Tarefa.vue'
 import Box from '../components/Box.vue'
@@ -48,38 +48,40 @@ export default defineComponent({
         Tarefa,
         Box
     },
-    data() {
-        return {
-            tarefaSelecionada: null as ITarefa | null
-        }
-    },
     computed: {
         listaEstaVazia(): boolean {
             return this.tarefas.length == 0
         }
     },
-    methods: {
-        salvarTarefa(tarefa: ITarefa) {
-            this.store.dispatch(CADASTRAR_TAREFA, tarefa)
-        },
-        alterarTarefa() {
-            this.store.dispatch(ALTERAR_TAREFA, this.tarefaSelecionada)
-            .then(() => this.fecharModal())
-        },
-        selecionarTarefa(tarefa: ITarefa) {
-            this.tarefaSelecionada = tarefa
-        },
-        fecharModal() {
-            this.tarefaSelecionada = null
-        }
-    },
     setup() {
         const store = useStore()
+        const tarefas = computed(() => store.state.tarefa.tarefas)
+        const tarefaSelecionada = ref(null as ITarefa | null)
+
+        const fecharModal = () => {
+            tarefaSelecionada.value = null
+        }
+        const salvarTarefa = (tarefa: ITarefa) => {
+            store.dispatch(CADASTRAR_TAREFA, tarefa)
+        }
+        const alterarTarefa = () => {
+            store.dispatch(ALTERAR_TAREFA, tarefaSelecionada.value).then(() => fecharModal())
+        }
+        const selecionarTarefa = (tarefa: ITarefa) => {
+            tarefaSelecionada.value = tarefa
+        }
+        
         store.dispatch(OBTER_TAREFAS)
         store.dispatch(OBTER_PROJETOS)
+        
         return {
             store,
-            tarefas: computed(() => store.state.tarefa.tarefas)
+            tarefas,
+            tarefaSelecionada,
+            salvarTarefa,
+            alterarTarefa,
+            selecionarTarefa,
+            fecharModal
         }
     }
 });
