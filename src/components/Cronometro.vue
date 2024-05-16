@@ -1,5 +1,8 @@
 <template>
     <section>
+        <spam class="icon is-small">
+            <i class="fa-regular fa-clock"></i>
+        </spam>
         <strong class="display">{{ tempoDecorrido }}</strong>
     </section>
 </template>
@@ -26,5 +29,6 @@ export default defineComponent({
 <style>
 .display {
     color: var(--texto-primario);
+    padding: 0.4rem;
 }
 </style>
