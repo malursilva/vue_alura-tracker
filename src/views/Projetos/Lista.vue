@@ -22,9 +22,9 @@
                     <td>{{ projeto.nome }}</td>
                     <td>
                         <router-link :to="`/projetos/${projeto.id}`" class="button">
-                            <spam class="icon is-small">
+                            <span class="icon is-small">
                                 <i class="fas fa-pencil-alt"></i>
-                            </spam>
+                            </span>
                         </router-link>
                         <button class="button m1-2 is-danger" @click="excluir(projeto.id)">
                             <span class="icon is-small">
@@ -42,6 +42,7 @@
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store';
 import { EXCLUIR_PROJETO } from '@/store/tipo-mutacoes';
+import { OBTER_PROJETOS } from '@/store/tipo-acoes';
 
 export default defineComponent({
     name: 'ListaProjetos',
@@ -52,6 +53,7 @@ export default defineComponent({
     },
     setup() {
         const store = useStore()
+        store.dispatch(OBTER_PROJETOS)
         return {
             store,
             projetos: computed(() => store.state.projetos)

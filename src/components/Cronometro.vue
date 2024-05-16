@@ -1,8 +1,8 @@
 <template>
     <section>
-        <spam class="icon is-small">
+        <span class="icon is-small">
             <i class="fa-regular fa-clock"></i>
-        </spam>
+        </span>
         <strong class="display">{{ tempoDecorrido }}</strong>
     </section>
 </template>
