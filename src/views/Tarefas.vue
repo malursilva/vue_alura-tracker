@@ -1,10 +1,18 @@
 <template>
     <Formulario @aoSalvarTarefa="salvarTarefa" />
     <div class="lista">
+        <div class="field">
+            <p class="control has-icons-left">
+                <input type="text" class="input" placeholder="Digite a descrição para filtrar" v-model="filtro" />
+                <span class="icon is-small is-left">
+                    <i class="fas fa-search"></i>
+                </span>
+            </p>
+        </div>
         <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa"
             @aoSelecionarTarefa="selecionarTarefa" />
         <Box v-if="listaEstaVazia">
-            Você não está muito produtivo hoje :/
+            Não foram encontradas tarefas :/
         </Box>
         <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
             <div class="modal-background"></div>
@@ -33,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref, watchEffect } from 'vue';
 import Formulario from '../components/Formulario.vue'
 import Tarefa from '../components/Tarefa.vue'
 import Box from '../components/Box.vue'
@@ -55,6 +63,7 @@ export default defineComponent({
     },
     setup() {
         const store = useStore()
+        const filtro = ref("")
         const tarefas = computed(() => store.state.tarefa.tarefas)
         const tarefaSelecionada = ref(null as ITarefa | null)
 
@@ -70,14 +79,19 @@ export default defineComponent({
         const selecionarTarefa = (tarefa: ITarefa) => {
             tarefaSelecionada.value = tarefa
         }
-        
+
         store.dispatch(OBTER_TAREFAS)
         store.dispatch(OBTER_PROJETOS)
-        
+
+        watchEffect(() => {
+            store.dispatch(OBTER_TAREFAS, filtro.value)
+        })
+
         return {
             store,
             tarefas,
             tarefaSelecionada,
+            filtro,
             salvarTarefa,
             alterarTarefa,
             selecionarTarefa,
