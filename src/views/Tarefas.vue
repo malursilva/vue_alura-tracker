@@ -14,29 +14,26 @@
         <Box v-if="listaEstaVazia">
             Não foram encontradas tarefas :/
         </Box>
-        <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Editando uma Tarefa</p>
-                    <button class="delete" aria-label="close" @click="fecharModal"></button>
-                </header>
-                <section class="modal-card-body">
-                    <div class="field">
-                        <label for="descricaoTarefa" class="label">
-                            Descrição
-                        </label>
-                        <input type="text" class="input" v-model="tarefaSelecionada.descricao" id="descricaoTarefa">
-                    </div>
-                </section>
-                <footer class="modal-card-foot">
-                    <div class="buttons">
-                        <button class="button is-success" @click="alterarTarefa">Salvar Alterações</button>
-                        <button class="button" @click="fecharModal">Cancelar</button>
-                    </div>
-                </footer>
-            </div>
-        </div>
+        <Modal :mostrar="tarefaSelecionada != null">
+            <template v-slot:cabecalho>
+                <p class="modal-card-title">Editando uma Tarefa</p>
+                <button class="delete" aria-label="close" @click="fecharModal"></button>
+            </template>
+            <template v-slot:corpo>
+                <div class="field">
+                    <label for="descricaoTarefa" class="label">
+                        Descrição
+                    </label>
+                    <input type="text" class="input" v-model="tarefaSelecionada!.descricao" id="descricaoTarefa">
+                </div>
+            </template>
+            <template v-slot:rodape>
+                <div class="buttons">
+                    <button class="button is-success" @click="alterarTarefa">Salvar Alterações</button>
+                    <button class="button" @click="fecharModal">Cancelar</button>
+                </div>
+            </template>
+        </Modal>
     </div>
 </template>
 
@@ -45,6 +42,7 @@ import { computed, defineComponent, ref, watchEffect } from 'vue';
 import Formulario from '../components/Formulario.vue'
 import Tarefa from '../components/Tarefa.vue'
 import Box from '../components/Box.vue'
+import Modal from '../components/Modal.vue'
 import { useStore } from '@/store';
 import { ALTERAR_TAREFA, CADASTRAR_TAREFA, OBTER_PROJETOS, OBTER_TAREFAS } from '@/store/tipo-acoes';
 import ITarefa from '@/interfaces/ITarefa';
@@ -54,7 +52,8 @@ export default defineComponent({
     components: {
         Formulario,
         Tarefa,
-        Box
+        Box,
+        Modal
     },
     computed: {
         listaEstaVazia(): boolean {
